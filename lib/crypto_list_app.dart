@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CryptoListApp extends StatelessWidget {
   const CryptoListApp({super.key});
@@ -7,6 +8,7 @@ class CryptoListApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'CryptoApp',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.blueGrey,
@@ -20,19 +22,19 @@ class CryptoListApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const MyHomePage(),
+      home: const App(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class App extends StatefulWidget {
+  const App({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<App> createState() => _AppState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -48,6 +50,11 @@ class _MyHomePageState extends State<MyHomePage> {
       body: ListView.builder(
         itemCount: 23,
         itemBuilder: (context, i) => ListTile(
+          leading: SvgPicture.asset(
+            'assets/svg/bitcoin.svg',
+            width: 35,
+            height: 35,
+          ),
           title: Text(
             'Bitcoin',
             style: theme.textTheme.titleMedium,
