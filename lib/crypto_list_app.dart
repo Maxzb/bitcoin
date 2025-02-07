@@ -13,6 +13,7 @@ class CryptoListApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.blueGrey,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
+        listTileTheme: ListTileThemeData(iconColor: Colors.white70),
         useMaterial3: true,
         // Переопределяем встроенные MaterialUI стили
         // например может переопределить только цвет для titleMedium
@@ -47,8 +48,11 @@ class _AppState extends State<App> {
         ),
         // leading: Icon(Icons.arrow_back),
       ),
-      body: ListView.builder(
+      body: ListView.separated(
         itemCount: 23,
+        separatorBuilder: (context, i) => Divider(
+          color: Colors.white10,
+        ),
         itemBuilder: (context, i) => ListTile(
           leading: SvgPicture.asset(
             'assets/svg/bitcoin.svg',
@@ -63,6 +67,7 @@ class _AppState extends State<App> {
             'Test',
             style: theme.textTheme.titleSmall,
           ),
+          trailing: Icon(Icons.arrow_forward_ios),
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
