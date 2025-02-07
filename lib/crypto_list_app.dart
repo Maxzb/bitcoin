@@ -11,6 +11,14 @@ class CryptoListApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'CryptoApp',
       theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.blueGrey,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
         scaffoldBackgroundColor: Colors.blueGrey,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
         listTileTheme: ListTileThemeData(iconColor: Colors.white70),
@@ -42,7 +50,6 @@ class _AppState extends State<App> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: theme.colorScheme.inversePrimary,
         title: Center(
           child: Text('CryptoApp'),
         ),
