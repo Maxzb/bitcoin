@@ -31,19 +31,19 @@ class CryptoListApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const App(),
+      home: const CryptoListScreen(),
     );
   }
 }
 
-class App extends StatefulWidget {
-  const App({super.key});
+class CryptoListScreen extends StatefulWidget {
+  const CryptoListScreen({super.key});
 
   @override
-  State<App> createState() => _AppState();
+  State<CryptoListScreen> createState() => _CryptoListScreenState();
 }
 
-class _AppState extends State<App> {
+class _CryptoListScreenState extends State<CryptoListScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -75,8 +75,28 @@ class _AppState extends State<App> {
             style: theme.textTheme.titleSmall,
           ),
           trailing: Icon(Icons.arrow_forward_ios),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => CryptoCoinApp(),
+              ),
+            );
+          },
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class CryptoCoinApp extends StatelessWidget {
+  const CryptoCoinApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('COIN PAGE'),
+      ),
     );
   }
 }
