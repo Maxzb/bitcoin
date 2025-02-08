@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -68,38 +70,67 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
         separatorBuilder: (context, i) => Divider(
           color: Colors.white10,
         ),
-        itemBuilder: (context, i) => ListTile(
-          leading: SvgPicture.asset(
-            'assets/svg/bitcoin.svg',
-            width: 35,
-            height: 35,
-          ),
-          title: Text(
-            'Bitcoin',
-            style: theme.textTheme.titleMedium,
-          ),
-          subtitle: Text(
-            'Test',
-            style: theme.textTheme.titleSmall,
-          ),
-          trailing: Icon(Icons.arrow_forward_ios),
-          onTap: () {
-            Navigator.of(context).pushNamed('/coin');
-          },
-        ),
+        itemBuilder: (context, i) {
+          const coinName = 'Bitcoin';
+
+          return ListTile(
+            leading: SvgPicture.asset(
+              'assets/svg/bitcoin.svg',
+              width: 35,
+              height: 35,
+            ),
+            title: Text(
+              coinName,
+              style: theme.textTheme.titleMedium,
+            ),
+            subtitle: Text(
+              'Test',
+              style: theme.textTheme.titleSmall,
+            ),
+            trailing: Icon(Icons.arrow_forward_ios),
+            onTap: () {
+              Navigator.of(context).pushNamed(
+                '/coin',
+                arguments: coinName,
+              );
+            },
+          );
+        },
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
 
-class CryptoCoinApp extends StatelessWidget {
+class CryptoCoinApp extends StatefulWidget {
   const CryptoCoinApp({super.key});
+
+  @override
+  State<CryptoCoinApp> createState() => _CryptoCoinAppState();
+}
+
+class _CryptoCoinAppState extends State<CryptoCoinApp> {
+  String? coinName;
+
+  @override
+  void didChangeDependencies() {
+    final args = ModalRoute.of(context)?.settings.arguments;
+
+    if (args == null || args is! String) {
+      print('ERROR');
+      return;
+    }
+    ;
+    coinName = args;
+    setState(() {});
+
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('COIN PAGE'),
+        title: Text(coinName ?? '...'),
       ),
     );
   }
