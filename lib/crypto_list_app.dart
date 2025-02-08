@@ -1,5 +1,5 @@
-import 'dart:math';
-
+import 'package:bitcoin/mockData/coins.dart';
+import 'package:bitcoin/mockData/service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -29,6 +29,12 @@ class CryptoListApp extends StatelessWidget {
         // например может переопределить только цвет для titleMedium
         textTheme: TextTheme(
           titleMedium: TextStyle(
+            color: Colors.white,
+          ),
+          titleSmall: TextStyle(
+            color: Colors.white70,
+          ),
+          bodySmall: TextStyle(
             color: Colors.white70,
           ),
         ),
@@ -57,47 +63,67 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final mockService = Service();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text('CryptoApp'),
+        appBar: AppBar(
+          title: Center(
+            child: Text('CryptoApp'),
+          ),
+          // leading: Icon(Icons.arrow_back),
         ),
-        // leading: Icon(Icons.arrow_back),
-      ),
-      body: ListView.separated(
-        itemCount: 23,
-        separatorBuilder: (context, i) => Divider(
-          color: Colors.white10,
-        ),
-        itemBuilder: (context, i) {
-          const coinName = 'Bitcoin';
+        body: FutureBuilder(
+          future: mockService.getData(),
+          builder: (context, AsyncSnapshot<CoinsData> snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return ListView.separated(
+                itemCount: coins.length,
+                separatorBuilder: (context, indx) => Divider(
+                  color: Colors.white10,
+                ),
+                itemBuilder: (context, indx) {
+                  // const coinName = 'Bitcoin';
 
-          return ListTile(
-            leading: SvgPicture.asset(
-              'assets/svg/bitcoin.svg',
-              width: 35,
-              height: 35,
-            ),
-            title: Text(
-              coinName,
-              style: theme.textTheme.titleMedium,
-            ),
-            subtitle: Text(
-              'Test',
-              style: theme.textTheme.titleSmall,
-            ),
-            trailing: Icon(Icons.arrow_forward_ios),
-            onTap: () {
-              Navigator.of(context).pushNamed(
-                '/coin',
-                arguments: coinName,
+                  return ListTile(
+                    leading: SvgPicture.asset(
+                      'assets/svg/bitcoin.svg',
+                      width: 35,
+                      height: 35,
+                    ),
+                    title: Text(
+                      coins[indx].title,
+                      style: theme.textTheme.titleMedium,
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          coins[indx].subTitle,
+                          style: theme.textTheme.titleSmall,
+                        ),
+                        Text(
+                          coins[indx].description,
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                        '/coin',
+                        arguments: coins[indx],
+                      );
+                    },
+                  );
+                },
               );
-            },
-          );
-        },
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ));
   }
 }
 
@@ -109,28 +135,13 @@ class CryptoCoinApp extends StatefulWidget {
 }
 
 class _CryptoCoinAppState extends State<CryptoCoinApp> {
-  String? coinName;
-
-  @override
-  void didChangeDependencies() {
-    final args = ModalRoute.of(context)?.settings.arguments;
-
-    if (args == null || args is! String) {
-      print('ERROR');
-      return;
-    }
-    ;
-    coinName = args;
-    setState(() {});
-
-    super.didChangeDependencies();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final Coin coin = ModalRoute.of(context)?.settings.arguments as Coin;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(coinName ?? '...'),
+        title: Text(coin.title),
       ),
     );
   }
