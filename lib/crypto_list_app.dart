@@ -31,7 +31,15 @@ class CryptoListApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const CryptoListScreen(),
+      routes: {
+        '/': (context) => CryptoListScreen(),
+        '/coin': (context) => CryptoCoinApp()
+      },
+      // Убираем home так как определили стартовый экран выше с помощью '/'
+      // home: const CryptoListScreen(),
+
+      // Можем указать стартовый экран вручную
+      // initialRoute: '/coin',
     );
   }
 }
@@ -76,11 +84,7 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
           ),
           trailing: Icon(Icons.arrow_forward_ios),
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => CryptoCoinApp(),
-              ),
-            );
+            Navigator.of(context).pushNamed('/coin');
           },
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
