@@ -1,73 +1,7 @@
-import 'package:bitcoin/data/user.dart';
-import 'package:bitcoin/features/crypto_coin/view/view.dart';
+import 'package:bitcoin/features/crypto_list/service/service.dart';
+import 'package:bitcoin/model/user.dart';
 import 'package:bitcoin/features/crypto_list/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-
-import 'dart:convert'; // Для работы с JSON
-import 'package:http/http.dart' as http;
-
-Future<List<User>> fetchUsers() async {
-  final response =
-      await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'));
-
-  if (response.statusCode == 200) {
-    // Если запрос успешен, преобразуем JSON в список объектов User
-    List<dynamic> data = jsonDecode(response.body);
-    return data.map((json) => User.fromJson(json)).toList();
-  } else {
-    // Если запрос не удался, выбрасываем исключение
-    throw Exception('Не удалось загрузить данные');
-  }
-}
-
-class CryptoList extends StatelessWidget {
-  const CryptoList({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'CryptoApp',
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.blueGrey,
-          titleTextStyle: TextStyle(
-            color: Colors.white,
-            fontSize: 22,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        scaffoldBackgroundColor: Colors.blueGrey,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
-        listTileTheme: ListTileThemeData(iconColor: Colors.white70),
-        useMaterial3: true,
-        // Переопределяем встроенные MaterialUI стили
-        // например может переопределить только цвет для titleMedium
-        textTheme: TextTheme(
-          titleMedium: TextStyle(
-            color: Colors.white,
-          ),
-          titleSmall: TextStyle(
-            color: Colors.white70,
-          ),
-          bodySmall: TextStyle(
-            color: Colors.white70,
-          ),
-        ),
-      ),
-      routes: {
-        '/': (context) => CryptoListScreen(),
-        '/coin': (context) => CryptoCoinScreen()
-      },
-      // Убираем home так как определили стартовый экран выше с помощью '/'
-      // home: const CryptoListScreen(),
-
-      // Можем указать стартовый экран вручную
-      // initialRoute: '/coin',
-    );
-  }
-}
 
 class CryptoListScreen extends StatefulWidget {
   const CryptoListScreen({super.key});

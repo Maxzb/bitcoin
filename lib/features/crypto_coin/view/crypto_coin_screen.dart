@@ -1,4 +1,4 @@
-import 'package:bitcoin/data/user.dart';
+import 'package:bitcoin/model/user.dart';
 import 'package:flutter/material.dart';
 
 class CryptoCoinScreen extends StatefulWidget {
