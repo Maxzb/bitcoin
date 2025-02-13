@@ -1,9 +1,7 @@
 import 'package:bitcoin/coin_page.dart';
 import 'package:bitcoin/data/user.dart';
-// import 'package:bitcoin/mockData/coins.dart';
-// import 'package:bitcoin/mockData/service.dart';
+import 'package:bitcoin/features/home/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'dart:convert'; // Для работы с JSON
 import 'package:http/http.dart' as http;
@@ -81,7 +79,6 @@ class CryptoListScreen extends StatefulWidget {
 class _CryptoListScreenState extends State<CryptoListScreen> {
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     // final mockService = Service();
 
     return Scaffold(
@@ -161,37 +158,7 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
               itemBuilder: (context, indx) {
                 User user = users[indx];
 
-                return ListTile(
-                  leading: SvgPicture.asset(
-                    'assets/svg/bitcoin.svg',
-                    width: 35,
-                    height: 35,
-                  ),
-                  title: Text(
-                    user.name,
-                    style: theme.textTheme.titleMedium,
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        user.username,
-                        style: theme.textTheme.titleSmall,
-                      ),
-                      Text(
-                        user.email,
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
-                  trailing: Icon(Icons.arrow_forward_ios),
-                  onTap: () {
-                    Navigator.of(context).pushNamed(
-                      '/coin',
-                      arguments: users[indx],
-                    );
-                  },
-                );
+                return CryptoCoinTile(user: user, indx: indx, users: users);
               },
             );
           } else {
