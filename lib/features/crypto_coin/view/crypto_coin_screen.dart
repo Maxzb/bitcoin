@@ -1,14 +1,14 @@
 import 'package:bitcoin/data/user.dart';
 import 'package:flutter/material.dart';
 
-class CryptoCoinApp extends StatefulWidget {
-  const CryptoCoinApp({super.key});
+class CryptoCoinScreen extends StatefulWidget {
+  const CryptoCoinScreen({super.key});
 
   @override
-  State<CryptoCoinApp> createState() => _CryptoCoinAppState();
+  State<CryptoCoinScreen> createState() => _CryptoCoinScreenState();
 }
 
-class _CryptoCoinAppState extends State<CryptoCoinApp> {
+class _CryptoCoinScreenState extends State<CryptoCoinScreen> {
   @override
   Widget build(BuildContext context) {
     // 1. С mockData

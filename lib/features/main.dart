@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:bitcoin/features/home/crypto_list.dart';
+import 'package:bitcoin/features/crypto_list/crypto_list.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,5 +13,5 @@ void main() {
     };
   }
 
-  runApp(const CryptoListApp());
+  runApp(const CryptoList());
 }

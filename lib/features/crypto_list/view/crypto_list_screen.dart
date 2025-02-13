@@ -1,6 +1,6 @@
-import 'package:bitcoin/coin_page.dart';
 import 'package:bitcoin/data/user.dart';
-import 'package:bitcoin/features/home/widgets/widgets.dart';
+import 'package:bitcoin/features/crypto_coin/view/view.dart';
+import 'package:bitcoin/features/crypto_list/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:convert'; // Для работы с JSON
@@ -20,8 +20,8 @@ Future<List<User>> fetchUsers() async {
   }
 }
 
-class CryptoListApp extends StatelessWidget {
-  const CryptoListApp({super.key});
+class CryptoList extends StatelessWidget {
+  const CryptoList({super.key});
 
   // This widget is the root of your application.
   @override
@@ -58,7 +58,7 @@ class CryptoListApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => CryptoListScreen(),
-        '/coin': (context) => CryptoCoinApp()
+        '/coin': (context) => CryptoCoinScreen()
       },
       // Убираем home так как определили стартовый экран выше с помощью '/'
       // home: const CryptoListScreen(),
