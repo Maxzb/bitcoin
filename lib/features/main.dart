@@ -1,6 +1,5 @@
 import 'dart:io';
-
-import 'package:bitcoin/crypto_list_app.dart';
+import 'package:bitcoin/features/home/crypto_list.dart';
 import 'package:flutter/material.dart';
 
 void main() {

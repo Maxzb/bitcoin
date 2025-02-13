@@ -1,6 +1,7 @@
+import 'package:bitcoin/coin_page.dart';
 import 'package:bitcoin/data/user.dart';
-import 'package:bitcoin/mockData/coins.dart';
-import 'package:bitcoin/mockData/service.dart';
+// import 'package:bitcoin/mockData/coins.dart';
+// import 'package:bitcoin/mockData/service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -81,7 +82,7 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final mockService = Service();
+    // final mockService = Service();
 
     return Scaffold(
       appBar: AppBar(
@@ -199,32 +200,6 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
             );
           }
         },
-      ),
-    );
-  }
-}
-
-class CryptoCoinApp extends StatefulWidget {
-  const CryptoCoinApp({super.key});
-
-  @override
-  State<CryptoCoinApp> createState() => _CryptoCoinAppState();
-}
-
-class _CryptoCoinAppState extends State<CryptoCoinApp> {
-  @override
-  Widget build(BuildContext context) {
-    // 1. С mockData
-    // final Coin coin = ModalRoute.of(context)?.settings.arguments as Coin;
-    // 2. С данными с сайта jsonplaceholder.typicode.com
-    final User user = ModalRoute.of(context)?.settings.arguments as User;
-
-    return Scaffold(
-      appBar: AppBar(
-        // 1. С mockData
-        // title: Text(coin.title),
-        // 2. С данными с сайта jsonplaceholder.typicode.com
-        title: Text(user.name),
       ),
     );
   }
