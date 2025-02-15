@@ -21,7 +21,7 @@ class _CryptoCoinScreenState extends State<CryptoCoinScreen> {
         // 1. С mockData
         // title: Text(coin.title),
         // 2. С данными с сайта jsonplaceholder.typicode.com
-        title: Text(user.name),
+        title: Text(user.firstName),
       ),
     );
   }
