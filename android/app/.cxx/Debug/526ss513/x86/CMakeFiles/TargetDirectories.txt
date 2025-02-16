@@ -1,0 +1,2 @@
+C:/WEB/FLUTTER_GAMES/bitcoin/android/app/.cxx/Debug/526ss513/x86/CMakeFiles/edit_cache.dir
+C:/WEB/FLUTTER_GAMES/bitcoin/android/app/.cxx/Debug/526ss513/x86/CMakeFiles/rebuild_cache.dir
