@@ -79,7 +79,7 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
 
       // 2. С данными с сайта jsonplaceholder.typicode.com
       body: FutureBuilder<List<User>>(
-        future: fetchUsers(),
+        future: loadUsers(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             List<User> users = snapshot.data!;
