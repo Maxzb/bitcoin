@@ -133,6 +133,7 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
                 },
               );
             }
+            // Экран для ошибки загрузки данных
             if (state is CryptoListLoadingFailure) {
               return Center(
                 child: Column(
@@ -152,6 +153,24 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
                           fontWeight: FontWeight.w500 // Новый цвет текста
                           ),
                     ),
+                    SizedBox(height: 7),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4), // Острые углы
+                        ),
+                      ),
+                      onPressed: () {
+                        cryptoListBloc.add(LoadCryptoListEvent());
+                      },
+                      child: Text(
+                        'Try again',
+                        style: theme.textTheme.bodyMedium!.copyWith(
+                          color: Colors.amber,
+                          fontWeight: FontWeight.w500, // Новый цвет текста
+                        ),
+                      ),
+                    )
                   ],
                 ),
               );
