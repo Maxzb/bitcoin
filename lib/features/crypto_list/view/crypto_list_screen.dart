@@ -116,69 +116,75 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
         // ),
 
         // BLOC
-        body: BlocBuilder<CryptoListBloc, CryptoListState>(
-          bloc: cryptoListBloc,
-          builder: (context, state) {
-            if (state is CryptoListLoaded) {
-              return ListView.separated(
-                itemCount: state.coinsListData.length,
-                separatorBuilder: (context, indx) => Divider(
-                  color: Colors.white10,
-                ),
-                itemBuilder: (context, indx) {
-                  User user = state.coinsListData[indx];
-
-                  return CryptoCoinTile(
-                      user: user, indx: indx, users: state.coinsListData);
-                },
-              );
-            }
-            // Экран для ошибки загрузки данных
-            if (state is CryptoListLoadingFailure) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Something went wrong',
-                      style: theme.textTheme.bodyLarge!.copyWith(
-                          color: Colors.white70,
-                          fontWeight: FontWeight.w600 // Новый цвет текста
-                          ),
-                    ),
-                    Text(
-                      'Please try again later',
-                      style: theme.textTheme.bodyMedium!.copyWith(
-                          color: Colors.white70,
-                          fontWeight: FontWeight.w500 // Новый цвет текста
-                          ),
-                    ),
-                    SizedBox(height: 7),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4), // Острые углы
-                        ),
-                      ),
-                      onPressed: () {
-                        cryptoListBloc.add(LoadCryptoListEvent());
-                      },
-                      child: Text(
-                        'Try again',
-                        style: theme.textTheme.bodyMedium!.copyWith(
-                          color: Colors.amber,
-                          fontWeight: FontWeight.w500, // Новый цвет текста
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              );
-            }
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+        body: RefreshIndicator(
+          onRefresh: () async {
+            cryptoListBloc.add(LoadCryptoListEvent());
           },
+          child: BlocBuilder<CryptoListBloc, CryptoListState>(
+            bloc: cryptoListBloc,
+            builder: (context, state) {
+              if (state is CryptoListLoaded) {
+                return ListView.separated(
+                  itemCount: state.coinsListData.length,
+                  separatorBuilder: (context, indx) => Divider(
+                    color: Colors.white10,
+                  ),
+                  itemBuilder: (context, indx) {
+                    User user = state.coinsListData[indx];
+
+                    return CryptoCoinTile(
+                        user: user, indx: indx, users: state.coinsListData);
+                  },
+                );
+              }
+              // Экран для ошибки загрузки данных
+              if (state is CryptoListLoadingFailure) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Something went wrong',
+                        style: theme.textTheme.bodyLarge!.copyWith(
+                            color: Colors.white70,
+                            fontWeight: FontWeight.w600 // Новый цвет текста
+                            ),
+                      ),
+                      Text(
+                        'Please try again later',
+                        style: theme.textTheme.bodyMedium!.copyWith(
+                            color: Colors.white70,
+                            fontWeight: FontWeight.w500 // Новый цвет текста
+                            ),
+                      ),
+                      SizedBox(height: 7),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(4), // Острые углы
+                          ),
+                        ),
+                        onPressed: () {
+                          cryptoListBloc.add(LoadCryptoListEvent());
+                        },
+                        child: Text(
+                          'Try again',
+                          style: theme.textTheme.bodyMedium!.copyWith(
+                            color: Colors.amber,
+                            fontWeight: FontWeight.w500, // Новый цвет текста
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          ),
         ));
   }
 }
