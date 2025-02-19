@@ -1,4 +1,4 @@
-import 'package:bitcoin/model/user.dart';
+import 'package:bitcoin/features/crypto_list/model/user.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_svg/svg.dart';
 

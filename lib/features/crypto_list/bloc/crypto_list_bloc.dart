@@ -1,5 +1,6 @@
+// import 'package:bitcoin/features/crypto_list/model/abstract_user.dart';
 import 'package:bitcoin/features/crypto_list/service/service.dart';
-import 'package:bitcoin/model/user.dart';
+import 'package:bitcoin/features/crypto_list/model/user.dart';
 // ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 
@@ -10,7 +11,7 @@ class CryptoListBloc extends Bloc<CryptoListEvent, CryptoListState> {
   CryptoListBloc() : super(CryptoListInitial()) {
     on<LoadCryptoListEvent>((event, emit) async {
       try {
-        final coinsListData = await loadUsers();
+        final coinsListData = await UsersRepository().loadUsers();
         emit(CryptoListLoaded(coinsListData: coinsListData));
       } catch (err) {
         emit(CryptoListLoadingFailure(exception: err));

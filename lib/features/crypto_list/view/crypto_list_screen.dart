@@ -1,6 +1,6 @@
 import 'package:bitcoin/features/crypto_list/bloc/crypto_list_bloc.dart';
 // import 'package:bitcoin/features/crypto_list/service/service.dart';
-import 'package:bitcoin/model/user.dart';
+import 'package:bitcoin/features/crypto_list/model/user.dart';
 import 'package:bitcoin/features/crypto_list/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
