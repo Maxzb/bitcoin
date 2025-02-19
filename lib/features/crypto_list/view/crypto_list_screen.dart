@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bitcoin/features/crypto_list/bloc/crypto_list_bloc.dart';
 // import 'package:bitcoin/features/crypto_list/service/service.dart';
 import 'package:bitcoin/features/crypto_list/model/user.dart';
@@ -18,7 +20,7 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
   @override
   void initState() {
     super.initState();
-    cryptoListBloc.add(LoadCryptoListEvent());
+    cryptoListBloc.add(LoadCryptoList());
   }
 
   @override
@@ -118,7 +120,9 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
         // BLOC
         body: RefreshIndicator(
           onRefresh: () async {
-            cryptoListBloc.add(LoadCryptoListEvent());
+            final completer = Completer();
+            cryptoListBloc.add(LoadCryptoList(completer: completer));
+            return completer.future;
           },
           child: BlocBuilder<CryptoListBloc, CryptoListState>(
             bloc: cryptoListBloc,
@@ -166,7 +170,7 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
                           ),
                         ),
                         onPressed: () {
-                          cryptoListBloc.add(LoadCryptoListEvent());
+                          cryptoListBloc.add(LoadCryptoList());
                         },
                         child: Text(
                           'Try again',
