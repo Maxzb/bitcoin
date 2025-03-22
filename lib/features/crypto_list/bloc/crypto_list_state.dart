@@ -4,8 +4,10 @@ class CryptoListState {}
 
 class CryptoListInitial extends CryptoListState {}
 
+// Отображение Лоадера
 class CryptoListLoading extends CryptoListState {} // не используется
 
+// Данные загружены
 class CryptoListLoaded extends CryptoListState {
   final List<User> coinsListData;
 

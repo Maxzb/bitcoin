@@ -15,7 +15,11 @@ class CryptoListBloc extends Bloc<CryptoListEvent, CryptoListState> {
       try {
         // Прокинуть ошибку
         // throw Error;
-        emit(CryptoListLoading());
+
+        // Отображаем Лоадер только в случае если данные не загружены и не отображаются на странице
+        if (state is! CryptoListLoaded) {
+          emit(CryptoListLoading());
+        }
         final coinsListData = await UsersRepository().loadUsers();
         emit(CryptoListLoaded(coinsListData: coinsListData));
       } catch (err) {
