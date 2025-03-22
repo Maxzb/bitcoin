@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart'; // Файл, который сгенерирует json_serializable
 
 @JsonSerializable()
-class User {
+class User extends Equatable {
   final int id;
   final String firstName;
   final String lastName;
@@ -18,7 +19,7 @@ class User {
   final Bank bank;
   final Company company;
 
-  User({
+  const User({
     required this.id,
     required this.firstName,
     required this.lastName,
@@ -36,6 +37,23 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
+
+  @override
+  List<Object?> get props => [
+        id,
+        firstName,
+        lastName,
+        age,
+        gender,
+        email,
+        phone,
+        username,
+        birthDate,
+        image,
+        address,
+        bank,
+        company
+      ];
 }
 
 @JsonSerializable()
