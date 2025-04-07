@@ -12,6 +12,7 @@ class CryptoCoinScreen extends StatefulWidget {
 class _CryptoCoinScreenState extends State<CryptoCoinScreen> {
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     // 1. С mockData
     // final Coin coin = ModalRoute.of(context)?.settings.arguments as Coin;
     // 2. С данными с сайта jsonplaceholder.typicode.com
@@ -22,7 +23,32 @@ class _CryptoCoinScreenState extends State<CryptoCoinScreen> {
         // 1. С mockData
         // title: Text(coin.title),
         // 2. С данными с сайта jsonplaceholder.typicode.com
-        title: Text(user.firstName),
+        title: Center(
+          child: Text(user.username),
+        ),
+      ),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              user.company.name,
+              style: theme.textTheme.titleLarge,
+            ),
+            Text(
+              user.firstName,
+              style: theme.textTheme.titleMedium,
+            ),
+            Text(
+              user.lastName,
+              style: theme.textTheme.titleMedium,
+            ),
+            Text(
+              user.email,
+              style: theme.textTheme.titleSmall,
+            ),
+          ],
+        ),
       ),
     );
   }

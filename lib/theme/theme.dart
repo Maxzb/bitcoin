@@ -16,6 +16,9 @@ final darkTheme = ThemeData(
   // Переопределяем встроенные MaterialUI стили
   // например может переопределить только цвет для titleMedium
   textTheme: TextTheme(
+    titleLarge: TextStyle(
+      color: Colors.white,
+    ),
     titleMedium: TextStyle(
       color: Colors.white,
     ),
